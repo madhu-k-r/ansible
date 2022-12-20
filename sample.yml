@@ -1,0 +1,25 @@
+--- # Task And Target playbook
+- hosts: devops
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: create the directory
+            file:
+                 path: sample1/samples/test/bin
+                 state: directory
+            tags:
+               - create
+
+- hosts: devops
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: tranfer the file file.cfg
+            ansible.builtin.template:
+                 src: bin/user/system/sample/file.cfg
+                 dest: sample1/samples/test/file.conf
+                 mode: '0644'
+            tags:
+               - transfer
