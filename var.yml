@@ -1,0 +1,10 @@
+--- # Task And Target playbook
+- hosts: devops
+  user: ansible
+  become: yes
+  connection: ssh
+  vars:
+       pkgname: httpd, tree
+  tasks: 
+       - name: install httpd and tree server
+         action: yum name='{{pkgname}}' state=installed 

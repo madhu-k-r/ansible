@@ -1,0 +1,22 @@
+--- # line in file playbook
+- hosts: devops
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: change the SYS_HOME
+      ansible.builtin.lineinfile:
+        path: file123.cfg 
+        regexp: '^export SYS_HOME=.*'
+        line: 'export SYS_HOME=/opt/ansible'
+
+- hosts: webserver
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: change the SYS_HOME
+      ansible.builtin.lineinfile:
+        path: file123.cfg
+        regexp: '^export SYS_HOME=.*'
+        line: 'export SYS_HOME=/home/ansible'
