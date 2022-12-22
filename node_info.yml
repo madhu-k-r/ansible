@@ -1,0 +1,18 @@
+--- # Target Playbook
+- hosts: devops
+  user: ansible
+  become : yes
+  connection: ssh
+  tasks:
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Check whether a package called httpd is installed
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.packages['httpd']  }} httpd installed!"
+      when: "'httpd' in ansible_facts.packages"
+    - name: Check whether a package called git is installed
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts.packages['git'] | to_json }}"
+      when: "'git' in ansible_facts.packages"
